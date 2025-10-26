@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcoli sul Triangolo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+ 
+        <!-- 1. Schermata di Benvenuto (ID: welcome) -->
+        <div id="welcome">
+            <h1>CALCOLI SUL TRIANGOLO</h1>
+            <div id="btnVaiArea" class="nav-button">
+                Calcola Area
+            </div>
+            <div id="btnVaiPerimetro" class="nav-button">
+                Calcola Perimetro
+            </div>
+        </div>
+
+        <!-- 2. Schermata Calcolo Area (ID: area) -->
+        <div id="area">
+            <h1>CALCOLO DELL'AREA</h1>
+            
+            <div class="input-group">
+                <label for="base">Base:</label>
+                <input type="number" id="base" placeholder="Inserisci la misura della base">
+            </div>
+            
+            <div class="input-group">
+                <label for="altezza">Altezza:</label>
+                <input type="number" id="altezza" placeholder="Inserisci la misura dell'altezza">
+            </div>
+
+            <div class="button-container">
+                <button id="calcola_area" class="btn btn-calcola">CALCOLA</button>
+                <!-- Pulsante "torna indietro" con classe condivisa "btn-torna-welcome" -->
+                <button class="btn btn-back btn-torna-welcome">Torna Indietro</button>
+            </div>
+            
+            <div id="risultato_area" class="risultato"></div>
+        </div>
+
+        <!-- 3. Schermata Calcolo Perimetro (ID: perimetro) -->
+        <div id="perimetro">
+            <h1>CALCOLO DEL PERIMETRO</h1>
+            
+            <div class="input-group">
+                <label for="latoA">Lato A:</label>
+                <input type="number" id="latoA" placeholder="Inserisci misura lato A">
+            </div>
+            
+            <div class="input-group">
+                <label for="latoB">Lato B:</label>
+                <input type="number" id="latoB" placeholder="Inserisci misura lato B">
+            </div>
+
+            <div class="input-group">
+                <label for="latoC">Lato C:</label>
+                <input type="number" id="latoC" placeholder="Inserisci misura lato C">
+            </div>
+
+            <div class="button-container">
+                <button id="calcola_perimetro" class="btn btn-calcola">CALCOLA</button>
+                <!-- Pulsante "torna indietro" con classe condivisa "btn-torna-welcome" -->
+                <button class="btn btn-back btn-torna-welcome">Torna Indietro</button>
+            </div>
+            
+            <div id="risultato_perimetro" class="risultato"></div>
+        </div>  
+        <script src="script.js"></script>
+
+</body>
+</html>

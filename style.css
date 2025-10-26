@@ -1,0 +1,203 @@
+/* Stili globali */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+}
+
+h1, h2, h3 {
+    line-height: 1.2;
+    color: #222;
+}
+
+code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background-color: #eee;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+pre {
+    background-color: #2d2d2d;
+    color: #f8f8f2;
+    padding: 1rem;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+}
+
+/* Header */
+header {
+    display: flex;
+    flex-direction: row;
+    background-color: #004C70;
+    color: white;
+    padding: 2rem 0;
+    align-items: center;
+    justify-content: center;
+}
+.logo img{
+    width: 320px;
+    height: auto;
+}
+.logo{
+    margin-right: 17rem;
+}
+header h1 {
+    color: white;
+    margin: 0;
+}
+header h2 {
+    color: white;
+    font-weight: 300;
+    margin: 0.25rem 0;
+}
+header p {
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Layout principale (Sidebar + Content) */
+.wrapper {
+    display: flex;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Sidebar di navigazione */
+.sidebar {
+    width: 280px;
+    flex-shrink: 0;
+    position: -webkit-sticky; /* Per Safari */
+    position: sticky;
+    top: 2rem;
+    align-self: flex-start; /* Per farla "attaccare" in cima */
+    height: calc(100vh - 4rem);
+    overflow-y: auto;
+    padding-right: 1rem;
+}
+
+.sidebar h3 {
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar nav li {
+    margin: 0.5rem 0;
+}
+
+.sidebar nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    display: block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+.sidebar nav a:hover {
+    background-color: #eee;
+    color: #007bff;
+}
+
+/* Contenuto principale */
+.content {
+    flex-grow: 1;
+    min-width: 0; /* Impedisce al flex-item di "sfondare" */
+    padding-left: 2rem;
+    border-left: 1px solid #ddd;
+}
+
+.content section {
+    margin-bottom: 3rem;
+    padding-top: 1rem; /* Per l'ancora della navigazione */
+}
+
+.content section h2 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 0.5rem;
+}
+
+/* Sezione Demo Interattiva */
+.demo-section {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.iframe-container {
+    width: 100%;
+    max-width: 600px; /* Limita la larghezza della demo */
+    height: 550px;
+    margin: 1rem auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden; /* Per arrotondare i bordi dell'iframe */
+}
+
+.iframe-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Glossario a colonne */
+.glossary-columns {
+    display: flex;
+    gap: 2rem;
+}
+.glossary-columns .column {
+    flex: 1;
+}
+.glossary-columns ul {
+    padding-left: 1.2rem;
+}
+.glossary-columns li {
+    margin-bottom: 0.5rem;
+}
+footer {
+    background-color: #004C70;
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+}
+footer h2{
+    color: white;
+}
+/* Responsive per schermi piccoli */
+@media (max-width: 1024px) {
+    .wrapper {
+        flex-direction: column;
+    }
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        overflow-y: visible;
+        margin-bottom: 2rem;
+        padding-right: 0;
+    }
+    .content {
+        padding-left: 0;
+        border-left: none;
+    }
+    .glossary-columns {
+        flex-direction: column;
+    }
+}

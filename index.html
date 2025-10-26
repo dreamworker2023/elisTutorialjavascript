@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manuale di Sopravvivenza per Studenti di Informatica</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="logo.png" alt="logo"></div>
+        <div class="header-content">
+            <h1>Manuale di Sopravvivenza per Studenti di Informatica</h1>
+        </div>
+    </header>
+
+    <div class="wrapper">
+        <aside class="sidebar">
+            <h3>Indice</h3>
+            <nav>
+                <ul>
+                    <li><a href="#introduzione">Introduzione</a></li>
+                    <li><a href="#demo">⭐ Demo Interattiva ⭐</a></li>
+                    <li><a href="#html">HTML: Lo Scheletro</a></li>
+                    <li><a href="#css">CSS: Lo Stile</a></li>
+                    <li><a href="#javascript">JavaScript: Il Cervello</a></li>
+                    <li><a href="#glossario">Glossario</a></li>
+                    <li><a href="#quiz"><b>Quiz di Autovalutazione</b></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <section id="introduzione">
+                            <h1>L'esercizio "Calcoli sul Triangolo" </h1>
+                <h2>Ciao ragazzi! </h2>
+                <p>Ho preparato questo manuale per analizzare insieme l'esercizio "Calcoli sul Triangolo". L'obiettivo è capire come i tre linguaggi fondamentali del web, HTML, CSS e JavaScript lavorano insieme per creare un'applicazione web interattiva. </p>
+                <p>Useremo l'app che abbiamo costruito come esempio per vedere la teoria in pratica. L'app ha un flusso semplice: </p>
+                <ol>
+                    <li><b>Schermata Iniziale:</b> Ci saluta con un titolo e due scelte: "Calcola Area" o "Calcola Perimetro". </li>
+                    <li><b>Schermate di Calcolo:</b> A seconda della scelta, ci mostra la schermata giusta (per l'area o per il perimetro) con i campi (input) necessari per inserire i numeri. </li>
+                    <li><b>Azione:</b> Ogni schermata ha un pulsante "CALCOLA" per vedere il risultato e un pulsante "Torna Indietro" per ricominciare. </li>
+                </ol>
+            </section>
+
+            <section id="demo" class="demo-section">
+                <h2>⭐ Demo Interattiva ⭐</h2>
+                <p>Qui puoi provare l'applicazione che analizzeremo. Giocaci un po' per capire il flusso descritto sopra.</p>
+                <div class="iframe-container">
+                    <iframe src="app-demo/index.html" title="Demo Live App Calcolatrice Triangolo"></iframe>
+                </div>
+            </section>
+            
+            <section id="html">
+                <h2>HTML: Lo Scheletro (index.html) </h2>
+                <p>L'HTML (HyperText Markup Language) definisce la struttura della nostra pagina. È come lo scheletro di un edificio: dice quali elementi ci sono e in che ordine. </p>
+                <p>Nel nostro file <code>index.html</code> (quello della demo!), le parti più importanti sono:</p>
+                
+                <h3><code>&lt;head&gt;</code></h3>
+                <p>Qui mettiamo le "informazioni di servizio". La più importante per noi è il link al file CSS: </p>
+                <pre><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></pre>
+                
+                <h3><code>&lt;body&gt;</code></h3>
+                <p>Qui c'è tutto il contenuto visibile. Invece di creare tre file HTML diversi, abbiamo usato un trucco da "Single Page Application" (SPA): abbiamo messo tutte e tre le schermate nello stesso file, dentro tre <code>&lt;div&gt;</code> principali: </p>
+                <ul>
+                    <li>Schermata Welcome (<code>&lt;div id="welcome"&gt;</code>) </li>
+                    <li>Schermata Area (<code>&lt;div id="area"&gt;</code>) </li>
+                    <li>Schermata Perimetro (<code>&lt;div id="perimetro"&gt;</code>) </li>
+                </ul>
+
+                <h3>IDs vs. Classi (Importante!) </h3>
+                <p><b>ID (<code>id="..."</code>):</b> È un identificativo unico. Lo usiamo per selezionare un elemento specifico (es. <code>id="welcome"</code>). </p>
+                <p><b>Classe (<code>class="..."</code>):</b> È un'etichetta di gruppo. Puoi dare la stessa classe a più elementi. Nel nostro codice, entrambi i pulsanti "Torna Indietro" hanno la <code>class="btn-torna-welcome"</code>. Questo ci permette di programmarli entrambi con una sola riga di JavaScript! </p>
+
+                <h3>Il Link a JavaScript</h3>
+                <p>Questa riga, messa alla fine del <code>&lt;body&gt;</code>, carica ed esegue il file <code>script.js</code>. Lo mettiamo alla fine per essere sicuri che tutto l'HTML (i pulsanti, gli input, ecc.) sia stato caricato prima che lo script provi a selezionarli. </p>
+                <pre><code>&lt;script src="script.js"&gt;&lt;/script&gt;</code></pre>
+            </section>
+            
+            <section id="css">
+                <h2>CSS: Lo Stile (style.css) </h2>
+                <p>Il CSS (Cascading Style Sheets) definisce l'aspetto della nostra pagina. È come l'arredamento e la pittura del nostro edificio. </p>
+                
+                <h3>Gestione delle Schermate</h3>
+                <p>Il concetto più importante è la gestione delle schermate. All'inizio, vogliamo mostrare solo la <code>#welcome</code> e nascondere le altre. Usiamo questa "regola magica": </p>
+                <pre><code>/* Nasconde le sezioni non attive */
+#area, #perimetro {
+    display: none; 
+}</code></pre>
+                <p>Sarà poi JavaScript a cambiare questa proprietà, dicendo <code>display: block;</code> alla sezione che ci interessa e <code>display: none;</code> alle altre. </p>
+
+                <h3>Altri concetti chiave del CSS:</h3>
+                <ul>
+                    <li><b>Selettori:</b> Il CSS usa i selettori per "agganciare" gli elementi HTML. 
+                        <ul>
+                            <li><code>#welcome</code>: Seleziona l'elemento con <code>id="welcome"</code> (il cancelletto # indica un ID). </li>
+                            <li><code>.nav-button</code>: Seleziona tutti gli elementi con <code>class="nav-button"</code> (il punto . indica una classe). </li>
+                            <li><code>:focus</code>: Una pseudo-classe che seleziona un input quando l'utente ci sta cliccando dentro. </li>
+                        </ul>
+                    </li>
+                    <li><b>Centratura:</b> Per centrare tutto, abbiamo usato un metodo moderno sul <code>&lt;body&gt;</code>: 
+                        <pre><code>body {
+    display: grid; 
+    place-items: center; 
+}</code></pre>
+                    </li>
+                    <li><b>Classi Dinamiche:</b> Abbiamo definito stili per <code>.risultato-successo</code> (verde) e <code>.risultato-errore</code> (rosso). Sarà JavaScript ad aggiungere queste classi per cambiare il colore del testo a seconda del risultato. </li>
+                </ul>
+            </section>
+
+            <section id="javascript">
+                <h2>JavaScript: Il Cervello (script.js) </h2>
+                <p>Il JavaScript (JS) è il cervello dell'applicazione. Gestisce l'interattività, risponde ai click, esegue calcoli e manipola l'HTML e il CSS. </p>
+                <p>Il nostro file è diviso in tre parti logiche: </p>
+
+                <h3>1. Selezione degli Elementi (DOM) </h3>
+                <p>Per prima cosa, "presentiamo" i nostri elementi HTML al JavaScript usando <code>document</code> e li salviamo in variabili <code>const</code>. </p>
+                <p>Per selezionare un ID singolo (è velocissimo): </p>
+                <pre><code>const sezioneWelcome = document.getElementById("welcome");</code></pre>
+                <p>Per selezionare tutti gli elementi con una certa classe: </p>
+                <pre><code>const btnsTornaWelcome = document.querySelectorAll(".btn-torna-welcome");</code></pre>
+                <p>Questo restituisce una collezione (simile a un array) di tutti i pulsanti "indietro". </p>
+
+                <h3>2. Funzioni Logiche (Le Azioni) </h3>
+                <p>Una funzione è un blocco di codice che esegue un compito specifico. </p>
+                
+                <h4><code>mostraSezione(idSezioneToShow)</code></h4>
+                <p>Questa funzione gestisce la navigazione. Prima nasconde tutte le sezioni, poi mostra solo quella con l'ID che le abbiamo passato (es. "area"). Se stiamo tornando a "welcome", pulisce anche i campi. </p>
+                
+                <h4><code>calcolaAreaTriangolo()</code> e <code>calcolaPerimetroTriangolo()</code></h4>
+                <p>Queste funzioni seguono uno schema logico preciso: </p>
+                <ol>
+                    <li><b>Reset:</b> Puliscono il risultato precedente. </li>
+                    <li><b>Lettura Valori:</b> Prendono il testo dagli input usando <code>.value</code> (es. <code>inputBase.value</code>). </li>
+                    <li><b>Conversione:</b> I valori dagli input sono stringhe! Dobbiamo convertirli in numeri usando <code>parseFloat()</code>. </li>
+                    <li><b>Validazione (Controllo Dati):</b> Fondamentale! Non ci fidiamo dell'utente. 
+                        <ul>
+                            <li>Controlliamo se il valore non è un numero con <code>isNaN()</code>. </li>
+                            <li>Controlliamo che i numeri siano positivi (es. <code>base &lt;= 0</code>). </li>
+                            <li>(Solo perimetro) Controlliamo la <b>Disuguaglianza Triangolare</b>: la somma di due lati deve essere sempre maggiore del terzo. </li>
+                        </ul>
+                    </li>
+                    <li><b>Calcolo:</b> Se la validazione è OK, eseguiamo la formula matematica (es. <code>(base * altezza) / 2</code>). </li>
+                    <li><b>Output:</b> Mostriamo il risultato all'utente. 
+                        <ul>
+                            <li><code>divRisultatoArea.textContent = ...</code> per impostare il testo. </li>
+                            <li><code>.toFixed(2)</code> per arrotondare a 2 decimali. </li>
+                            <li><code>divRisultatoArea.classList.add("risultato-successo")</code> per colorare il testo di verde (o "risultato-errore" per il rosso). </li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h3>3. Collegamento degli Eventi (Event Listeners) </h3>
+                <p>Questa è la "colla". Diciamo a JS: "Quando succede un 'click' su questo elemento, esegui questa funzione." </p>
+                <p>Per un pulsante singolo (come "Calcola Area"): </p>
+                <pre><code>btnCalcolaArea.addEventListener("click", calcolaAreaTriangolo);</code></pre>
+                
+                <p>Per i pulsanti di navigazione, usiamo una funzione anonima per passare un argomento: </p>
+                <pre><code>btnVaiArea.addEventListener("click", function() {
+    mostraSezione("area"); 
+});</code></pre>
+                
+                <p>Per i pulsanti multipli (i "Torna Indietro") usiamo il ciclo <code>.forEach()</code>. È elegantissimo: </p>
+                <pre><code>btnsTornaWelcome.forEach(function(bottone) { 
+    bottone.addEventListener("click", function() {
+        mostraSezione("welcome");
+    });
+});</code></pre>
+                <p>Questo ciclo applica la stessa logica a tutti i pulsanti "indietro" in 3 righe di codice. </p>
+            </section>
+            
+            <section id="glossario">
+                <h2>Glossario dei Comandi Utilizzati </h2>
+                <p>Ecco un riepilogo dei comandi e concetti chiave. </p>
+                
+                <div class="glossary-columns">
+                    <div class="column">
+                        <h3>HTML </h3>
+                        <ul>
+                            <li><code>&lt;div&gt;</code>: Contenitore generico. </li>
+                            <li><code>&lt;input type="number"&gt;</code>: Campo per inserire numeri. </li>
+                            <li><code>&lt;label&gt;</code>: Etichetta per un input. </li>
+                            <li><code>&lt;button&gt;</code>: Pulsante. </li>
+                            <li><code>&lt;link&gt;</code>: Collega un file CSS (nel <code>&lt;head&gt;</code>). </li>
+                            <li><code>&lt;script&gt;</code>: Collega un file JS (nel <code>&lt;body&gt;</code>). </li>
+                            <li><code>id="..."</code>: Identificativo unico. </li>
+                            <li><code>class="..."</code>: Etichetta di gruppo. </li>
+                        </ul>
+                        <h3>CSS </h3>
+                        <ul>
+                            <li><code>display: none;</code>: Rende invisibile un elemento. </li>
+                            <li><code>display: block;</code>: Rende visibile un elemento. </li>
+                            <li><code>display: grid;</code>: Attiva il layout a griglia. </li>
+                            <li><code>place-items: center;</code>: Centra il contenuto in una griglia. </li>
+                            <li><code># (selettore ID)</code>: Seleziona per ID (es. <code>#welcome</code>). </li>
+                            <li><code>. (selettore Classe)</code>: Seleziona per classe (es. <code>.btn-torna-welcome</code>). </li>
+                            <li><code>:focus</code>: Pseudo-classe per un elemento attivo. </li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h3>JavaScript </h3>
+                        <ul>
+                            <li><code>document.getElementById("id")</code>: Seleziona l'elemento con quell'ID. </li>
+                            <li><code>document.querySelectorAll(".classe")</code>: Seleziona tutti gli elementi con quella classe. </li>
+                            <li><code>const</code>: Dichiara una variabile costante. </li>
+                            <li><code>function() { ... }</code>: Definisce una funzione. </li>
+                            <li><code>.addEventListener("click", ...)</code>: Ascolta un evento (click) su un elemento. </li>
+                            <li><code>.style.display = "none"</code>: Modifica il CSS per nascondere. </li>
+                            <li><code>.value</code>: Ottiene il valore da un input. </li>
+                            <li><code>parseFloat(stringa)</code>: Converte una stringa in un numero. </li>
+                            <li><code>isNaN(valore)</code>: Controlla se un valore non è un numero. </li>
+                            <li><code>.textContent = "..."</code>: Imposta il testo di un elemento. </li>
+                            <li><code>.classList.add("classe")</code>: Aggiunge una classe CSS. </li>
+                            <li><code>.forEach(function() { ... })</code>: Esegue un ciclo su ogni elemento di una collezione. </li>
+                            <li><code>.toFixed(2)</code>: Arrotonda un numero a 2 decimali. </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section id="quiz">
+    <h2>Quiz di Autovalutazione</h2>
+    <p>Verifica la tua comprensione dei concetti chiave. Seleziona la risposta che ritieni corretta per ogni domanda e premi "Verifica" in fondo.</p>
+
+    <form id="quiz-form">
+        
+        <div class="quiz-question" data-question="1">
+            <p><b>1.</b> Dove è consigliato posizionare il tag <code>&lt;script src="script.js"&gt;</code> per assicurarsi che l'HTML sia caricato prima? </p>
+            <ul>
+                <li>
+                    <label><input type="radio" name="q1" value="a"> Nel <code>&lt;head&gt;</code>, prima del CSS.</label>
+                </li>
+                <li>
+                    <label><input type="radio" name="q1" value="b"> Alla fine del <code>&lt;body&gt;</code>.</label>
+                </li>
+                <li>
+                    <label><input type="radio" name="q1" value="c"> All'inizio del <code>&lt;body&gt;</code>.</label>
+                </li>
+            </ul>
+        </div>
+
+        <div class="quiz-question" data-question="2">
+            <p><b>2.</b> Quale selettore CSS si usa per "agganciare" un elemento con <code>id="welcome"</code>? </p>
+            <ul>
+                <li>
+                    <label><input type="radio" name="q2" value="a"> <code>.welcome</code></label>
+                </li>
+                <li>
+                    <label><input type="radio" name="q2" value="b"> <code>welcome</code></label>
+                </li>
+                <li>
+                    <label><input type="radio" name="q2" value="c"> <code>#welcome</code></label>
+                </li>
+            </ul>
+        </div>
+
+        <div class="quiz-question" data-question="3">
+            <p><b>3.</b> Quale regola CSS è la "regola magica" usata per nascondere completamente le schermate non attive? </p>
+            <ul>
+                <li>
+                    <label><input type="radio" name="q3" value="a"> <code>display: none;</code></label>
+                </li>
+                <li>
+                    <label><input type="radio" name="q3" value="b"> <code>visibility: hidden;</code></label>
+                </li>
+                <li>
+                    <label><input type="radio" name="q3" value="c"> <code>opacity: 0;</code></label>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="quiz-question" data-question="4">
+            <p><b>4.</b> Quando JavaScript legge un valore da un <code>&lt;input&gt;</code> usando <code>.value</code>, che tipo di dato ottiene? </p>
+            <ul>
+                <li>
+                    <label><input type="radio" name="q4" value="a"> Sempre un Numero (Number).</label>
+                </li>
+                <li>
+                    <label><input type="radio" name="q4" value="b"> Sempre una Stringa (Testo).</label>
+                </li>
+                <li>
+                    <label><input type="radio" name="q4" value="c"> Un Numero se <code>type="number"</code>, altrimenti una Stringa.</label>
+                </li>
+            </ul>
+        </div>
+
+        <div class="quiz-question" data-question="5">
+            <p><b>5.</b> Quale funzione JS si usa per convertire una stringa (es. "10.5") in un numero con decimali per i calcoli? </p>
+            <ul>
+                <li>
+                    <label><input type="radio" name="q5" value="a"> <code>parseInt()</code></label>
+                </li>
+                <li>
+                    <label><input type="radio" name="q5" value="b"> <code>parseFloat()</code></label>
+                </li>
+                <li>
+                    <label><input type="radio" name="q5" value="c"> <code>isNumber()</code></label>
+                </li>
+            </ul>
+        </div>
+
+        <div class="quiz-question" data-question="6">
+            <p><b>6.</b> Come si aggiunge una classe CSS (es. "risultato-errore") a un elemento usando JavaScript? </p>
+            <ul>
+                <li>
+                    <label><input type="radio" name="q6" value="a"> <code>elemento.style = "risultato-errore";</code></label>
+                </li>
+                <li>
+                    <label><input type="radio" name="q6" value="b"> <code>elemento.textContent = ".risultato-errore";</code></label>
+                </li>
+                <li>
+                    <label><input type="radio" name="q6" value="c"> <code>elemento.classList.add("risultato-errore");</code></label>
+                </li>
+            </ul>
+        </div>
+
+        <div class="quiz-question" data-question="7">
+            <p><b>7.</b> Perché si usa <code>.forEach()</code> sui <code>btnsTornaWelcome</code>? </p>
+            <ul>
+                <li>
+                    <label><input type="radio" name="q7" value="a"> Per selezionare solo il primo pulsante "indietro".</label>
+                </li>
+                <li>
+                    <label><input type="radio" name="q7" value="b"> Per applicare la stessa logica (un EventListener) a *tutti* i pulsanti "indietro" con 3 righe di codice.</label>
+                </li>
+                <li>
+                    <label><input type="radio" name="q7" value="c"> Per contare quanti pulsanti "indietro" ci sono.</label>
+                </li>
+            </ul>
+        </div>
+
+        <div class="quiz-question" data-question="8">
+            <p><b>8.</b> Cosa controlla la funzione <code>isNaN(valore)</code> durante la validazione? </p>
+            <ul>
+                <li>
+                    <label><input type="radio" name="q8" value="a"> Se il valore è un numero negativo.</label>
+                </li>
+                <li>
+                    <label><input type="radio" name="q8" value="b"> Se il valore non è un numero valido (es. l'utente ha scritto "ciao").</label>
+                </li>
+                <li>
+                    <label><input type="radio" name="q8" value="c"> Se il valore è nullo (null).</label>
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+        
+        <button type="submit" id="quiz-submit-btn">Verifica le tue risposte</button>
+        
+        <div id="quiz-risultati"></div>
+
+    </form>
+</section>
+        </main>
+    </div>
+    <footer><h2>Copyright &copy Paolo Sanna 2025/2026</h2></footer>
+    </div> <script src="tutorial.js"></script>
+</body>
+</html>
